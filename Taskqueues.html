@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Koç İletişim - Müşteri Ara</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/modern-business.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" href="fonts/koc_logo_icon.ico">
+    <script src="js/crmApi.js"></script>
+    <script type="text/javascript" src="js/knockout-3.4.0.js"></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body style="background-color:#e6ffcc">
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-header">
+                <a class="navbar-brand" href="">Koç İletişim</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active">
+                        <a href="Taskqueues.html">Task Listesi</a>
+                    </li>
+                    <li>
+                        <a href="contact.html">İletişim</a>
+                    </li>
+                    <li>
+                        <a id="exit" href="">Çıkış</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="bindingContainer" class="container">
+        <div class="row col-md-12 center-block" style="margin:30px 0 30px 0;">
+            <div class="row" style="background-color:aquamarine;border: 1px solid #fff !important;">
+                <div class="col-md-6 navbar-right" style="margin:10px 10px 5px 10px;">
+                    <label class="form-group col-md-4">Müşteri Numarası :</label>
+                    <input type="text" class="form-group control-group col-md-4" id="smno">
+                    <button type="submit" id="ara" class="btn btn-primary navbar-right col-md-4">Müşteri Ara</button>
+                </div>
+            </div>
+        </div>
+        <div class="row center-block">
+            <table class="table table-bordered table-hover" data-bind="visible:taskqueuelist().length > 0" id="taskquetable">
+                <thead style="background-color:aquamarine">
+                    <tr>
+                        <th class="col-md-1" style="border-right: 1px solid #ddd;">Task</th>
+                        <th class="col-md-1" style="border-right: 1px solid #ddd;">İl</th>
+                        <th class="col-md-1" style="border-right: 1px solid #ddd;">İlçe</th>
+                        <th class="col-md-1" style="border-right: 1px solid #ddd;">Müşteri</th>
+                        <th class="col-md-1" style="border-right: 1px solid #ddd;">Personel</th>
+                        <th class="col-md-1" style="border-right: 1px solid #ddd;">Atanma Tarihi</th>
+                        <th class="col-md-1" style="border-right: 1px solid #ddd;">Netflow Tarihi</th>
+                        <th class="col-md-1" style="border-right: 1px solid #ddd;">Sonlanma Tarihi</th>
+                        <th class="col-md-2" style="border-right: 1px solid #ddd;">Durum</th>
+                        <th class="col-md-2" style="border-right: 1px solid #ddd;">Açıklama</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- ko foreach: taskqueuelist -->
+                    <tr>
+                        <td style="font-size:large;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif" data-bind="text:task.taskname"></td>
+                        <td data-bind="text: attachedcustomer && (attachedcustomer.il && attachedcustomer.il.ad || 'Boş') "></td>
+                        <td data-bind="text: attachedcustomer && (attachedcustomer.ilce && attachedcustomer.ilce.ad || 'Boş') "></td>
+                        <td style="color:#284af5;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">
+                            <a href="#customerinfo" class="customer" role="button" data-toggle="modal" data-bind="value:attachedcustomer.customerid">
+                                <span data-bind="text: attachedcustomer && (attachedcustomer.customername && (attachedcustomer.customername) || 'Boş')"></span>
+                            </a>
+                        </td>
+                        <td data-bind="text: (attachedpersonel && attachedpersonel.personelname || 'Atanmamış') "></td>
+                        <td data-bind="text: attachmentdate ? moment(attachmentdate).format('LLL') : 'Boş'"></td>
+                        <td data-bind="text: (appointmentdate ? moment(appointmentdate).format('LLL') : 'Boş' )"></td>
+                        <td data-bind="text: consummationdate ? moment(consummationdate).format('LLL') : 'Boş'"></td>
+                        <td style="font-size:large;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif" data-bind="text:(taskstatepool &&taskstatepool.taskstate || 'AÇIK')"></td>
+                        <td data-bind="text: description"></td>
+                    </tr>
+                    <!-- /ko -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/Taskqueues.js"></script>
+    <script src="js/moment.js"></script>
+    <script>
+        $(document).ready(function () {
+            moment.locale('tr');
+        });
+    </script>
+
+</body>
+</html>
