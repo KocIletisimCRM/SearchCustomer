@@ -16,23 +16,36 @@ var dataModel = {
     selectedCustomer: ko.observable(),
     ara: function () {
         var self = this;
-        var data = {
-            pageNo: 1,
-            rowsPerPage: 100,
-            superonline: { fieldName: 'superonlineCustNo', op: 2, value: $("#smno").val() },
-        };
-        crmAPI.getTaskqueuesForBayi(data, function (a, b, c) {
-            self.taskqueuelist(a.data.rows);
-            $(".customer").click(function () {
-                self.selectedCustomer(self.taskqueuelist()[0].attachedcustomer);
-            });
-        }, null, null);
+        if ($("#smno").val().replace(/ /g, '').length < 4) {
+            $("#uyari").show();
+        }
+        else {
+            $("#uyari").hide();
+            var data = {
+                pageNo: 1,
+                rowsPerPage: 100,
+                superonline: { fieldName: 'superonlineCustNo', op: 2, value: $("#smno").val() },
+            };
+            crmAPI.getTaskqueuesForBayi(data, function (a, b, c) {
+                self.taskqueuelist(a.data.rows);
+                $(".customer").click(function () {
+                    self.selectedCustomer(self.taskqueuelist()[0].attachedcustomer);
+                });
+            }, null, null);
+        }
     },
     getUser: function () {
         var self = this;
         crmAPI.userInfo(function (a, b, c) {
             self.user(a);
         }, null, null);
+    },
+    enterfilter: function (d, e) {
+        var self = this;
+        if (e && (e.which == 1 || e.which == 13)) {
+            self.ara();
+        }
+        return true;
     },
     renderBindings: function () {
         var self = this;
@@ -44,10 +57,10 @@ var dataModel = {
 $("#ara").click(function () {
     dataModel.ara();
 });
-
 $("#exit").click(function () {
     document.cookie = "token=;";
     crmAPI.setCookie("tqlFilter", "");
     window.location.href = "index.html";
 
 });
+$("#uyari").hide();
