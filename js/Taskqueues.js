@@ -16,6 +16,7 @@ var dataModel = {
     selectedCustomer: ko.observable(),
     ara: function () {
         var self = this;
+        $("#bilgi").hide();
         if ($("#smno").val().replace(/ /g, '').length < 4) {
             $("#uyari").show();
         }
@@ -28,6 +29,8 @@ var dataModel = {
             };
             crmAPI.getTaskqueuesForBayi(data, function (a, b, c) {
                 self.taskqueuelist(a.data.rows);
+                if (self.taskqueuelist().length == 0)
+                    $("#bilgi").show();
                 $(".customer").click(function () {
                     self.selectedCustomer(self.taskqueuelist()[0].attachedcustomer);
                 });
