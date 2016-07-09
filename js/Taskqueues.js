@@ -13,6 +13,7 @@ $(document).ready(function () {
 var dataModel = {
     taskqueuelist: ko.observableArray([]),
     user: ko.observable(),
+    selectedCustomer: ko.observable(),
     ara: function () {
         var self = this;
         var data = {
@@ -22,6 +23,9 @@ var dataModel = {
         };
         crmAPI.getTaskqueuesForBayi(data, function (a, b, c) {
             self.taskqueuelist(a.data.rows);
+            $(".customer").click(function () {
+                self.selectedCustomer(self.taskqueuelist()[0].attachedcustomer);
+            });
         }, null, null);
     },
     getUser: function () {

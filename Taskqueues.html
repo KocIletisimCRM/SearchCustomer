@@ -100,6 +100,88 @@
                 </tbody>
             </table>
         </div>
+        <!-- customer info -->
+        <div class="modal fade" id="customerinfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog modal-sm" role="document" style="margin-top: 50px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Müşteri Kimlik Kartı</h4>
+                    </div>
+                    <div class="modal-body" data-bind="with: selectedCustomer" style="display: inline-block; position: relative; min-height: 50px;">
+
+                        <div class="col-xs-6 col-sm-6 col-md-6 cls-padding-0px" style="margin-top: 3px; padding: 4px 0 0 0">
+                            <p>ID</p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 cls-padding-0px" style="margin-top: 3px; padding: 4px 0 0 0">
+                            <p><label data-bind="text:customerid"></label></p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 cls-padding-0px" style="margin-top: 3px; padding: 4px 0 0 0">
+                            <p>Müşteri No</p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 cls-padding-0px" style="margin-top: 3px; padding: 4px 0 0 0">
+                            <p><label data-bind="text:superonlineCustNo"></label></p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 cls-padding-0px" style="margin-top: 3px; padding: 4px 0 0 0">
+                            <p>Adı Soyadı</p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 cls-padding-0px" style="margin-top: 3px; padding: 4px 0 0 0">
+                            <p><label data-bind="text:customername || 'yok'"></label></p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 cls-padding-0px" style="margin-top: 3px; padding: 4px 0 0 0">
+                            <p>Tc Kimlik No</p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 cls-padding-0px" style="margin-top: 3px; padding: 4px 0 0 0">
+                            <p><label data-bind="text:tc || 'yok'"></label></p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 cls-padding-0px" style="margin-top: 3px; padding: 4px 0 0 0">
+                            <p>GSM</p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 cls-padding-0px" style="margin-top: 3px; padding: 4px 0 0 0">
+                            <p><label data-bind="text:gsm || 'yok'"></label></p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 cls-padding-0px" style="margin-top: 3px; padding: 4px 0 0 0">
+                            <p>Sabit Tel</p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 cls-padding-0px" style="margin-top: 3px; padding: 4px 0 0 0">
+                            <p><label data-bind="text:phone || 'yok'"></label></p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 cls-padding-0px" style="margin-top: 3px; padding: 4px 0 0 0">
+                            <p>E-Posta</p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 cls-padding-0px" style="margin-top: 3px; padding: 4px 0 0 0">
+                            <p><label data-bind="text:email || 'yok'"></label></p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 cls-padding-0px" style="margin-top: 3px; padding: 4px 0 0 0">
+                            <p>Doğum Tarihi</p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 cls-padding-0px" style="margin-top: 3px; padding: 4px 0 0 0">
+                            <p><label data-bind="text:birthdate || 'yok'"></label></p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 cls-padding-0px" style="margin-top: 3px; padding: 4px 0 0 0">
+                            <p>İl</p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 cls-padding-0px" style="margin-top: 3px; padding: 4px 0 0 0">
+                            <p><label data-bind="text:attachedcustomer && (attachedcustomer.il && attachedcustomer.il.ad || 'Girilmemiş')"></label></p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 cls-padding-0px" style="margin-top: 3px; padding: 4px 0 0 0">
+                            <p>İlçe</p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 cls-padding-0px" style="margin-top: 3px; padding: 4px 0 0 0">
+                            <p><label data-bind="text:attachedcustomer && (attachedcustomer.ilce && attachedcustomer.ilce.ad || 'Girilmemiş')"></label></p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 cls-padding-0px" style="margin-top: 3px; padding: 4px 0 0 0">
+                            <p>Açıklama / Açık Adres</p>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 cls-padding-0px" style="margin-top: 3px; padding: 4px 0 0 0">
+                            <p><textarea data-bind="value:description || 'yok', enable:false" class="form-control" rows="4"></textarea></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- müşteri bilgilerini düzenleme For Modal Finish-->
+        </div>
     </div>
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
