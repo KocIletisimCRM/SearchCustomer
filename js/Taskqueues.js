@@ -14,6 +14,13 @@ var dataModel = {
     taskqueuelist: ko.observableArray([]),
     user: ko.observable(),
     selectedCustomer: ko.observable(),
+    getcustomer: function (custid) {
+        var self = this;
+        for (var i = 0; i < self.taskqueuelist().length; i++) {
+            if (self.taskqueuelist()[i].attachedcustomer.customerid == custid)
+                self.selectedCustomer(self.taskqueuelist()[i].attachedcustomer);
+        }
+    },
     ara: function () {
         var self = this;
         $("#bilgi").hide();
@@ -26,13 +33,14 @@ var dataModel = {
                 pageNo: 1,
                 rowsPerPage: 100,
                 superonline: { fieldName: 'superonlineCustNo', op: 2, value: $("#smno").val() },
+                customer: $("#cid").val() ? {fieldName: 'customerid', op: 2, value: $("#cid").val()} : null,
             };
             crmAPI.getTaskqueuesForBayi(data, function (a, b, c) {
                 self.taskqueuelist(a.data.rows);
                 if (self.taskqueuelist().length == 0)
                     $("#bilgi").show();
                 $(".customer").click(function () {
-                    self.selectedCustomer(self.taskqueuelist()[0].attachedcustomer);
+                    self.getcustomer($(this).val());
                 });
             }, null, null);
         }

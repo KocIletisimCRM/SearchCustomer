@@ -56,10 +56,13 @@
             <div class="row" style="background-color:aquamarine;border: 1px solid #fff !important;">
                 <label class="form-group col-md-4 left text-danger" hidden id="uyari" style="margin:10px 10px 5px 10px;">Müşteri Numarası Hatalı Girildi !</label>
                 <label class="form-group col-md-4 left text-danger" hidden id="bilgi" style="margin:10px 10px 5px 10px;">Müşteri Bulunamadı !</label>
-                <div class="col-md-6 navbar-right" style="margin:10px 10px 5px 10px;">
-                    <label class="form-group col-md-4">Müşteri Numarası :</label>
-                    <input type="text" class="form-group control-group col-md-4" data-bind="valueUpdate: 'keydown', event: { keypress: enterfilter }" id="smno">
-                    <button type="submit" id="ara" class="btn btn-primary navbar-right col-md-4">Müşteri Ara</button>
+                <div class="col-md-12 navbar-right" style="margin:10px 10px 5px 10px;">
+                    <label class="form-group col-md-2 col-sm-6 col-xs-6">Müşteri Numarası :</label>
+                    <input type="text" class="form-group control-group col-md-3 col-sm-5 col-xs-6" placeholder="Süperonline Müşteri No (Zorunlu)" data-bind="valueUpdate: 'keydown', event: { keypress: enterfilter }" id="smno">
+                    <label class="form-group col-md-1 col-sm-1 col-xs-1">&nbsp;&nbsp;</label>
+                    <label class="form-group col-md-2 col-sm-4 col-xs-4">Müşteri ID :</label>
+                    <input type="text" class="form-group control-group col-md-3 col-sm-6 col-xs-6" placeholder="Koç İletişim Müşteri No (İsteğe Bağlı)" data-bind="valueUpdate: 'keydown', event: { keypress: enterfilter }" id="cid">
+                    <button type="submit" id="ara" class="btn btn-primary navbar-right col-md-1 col-sm-2 col-xs-4">Müşteri Ara</button>
                 </div>
             </div>
         </div>
@@ -87,7 +90,7 @@
                         <td data-bind="text: attachedcustomer && (attachedcustomer.ilce && attachedcustomer.ilce.ad || 'Boş') "></td>
                         <td style="color:#284af5;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">
                             <a href="#customerinfo" class="customer" role="button" data-toggle="modal" data-bind="value:attachedcustomer.customerid">
-                                <span data-bind="text: attachedcustomer && (attachedcustomer.customername && (attachedcustomer.customername) || 'Boş')"></span>
+                                <span data-bind="text: attachedcustomer && (attachedcustomer.customername && (attachedcustomer.customername + ' (' + attachedcustomer.customerid + ')') || 'Boş')"></span>
                             </a>
                         </td>
                         <td data-bind="text: (attachedpersonel && attachedpersonel.personelname || 'Atanmamış') "></td>
